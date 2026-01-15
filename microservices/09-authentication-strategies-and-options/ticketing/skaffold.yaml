@@ -1,0 +1,25 @@
+apiVersion: skaffold/v3alpha1
+kind: Config
+manifests:
+  rawYaml:
+    - kubernetes/**
+deploy:
+  kubectl: {}
+
+build:
+  local:
+    push: false
+  artifacts:
+    - image: rkatorjuliusworks/ticketing-auth
+      context: auth
+      docker:
+        dockerfile: Dockerfile
+        noCache: false
+        pullParent: false
+        squash: false
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: /app/src
+          - src: "tsconfig.json"
+            dest: /app
