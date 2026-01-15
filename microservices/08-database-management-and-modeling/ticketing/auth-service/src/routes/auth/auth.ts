@@ -6,13 +6,11 @@ const router = Router();
 
 router.post(
   '/signup',
-  [
-    body('email').isEmail().withMessage('Email must be valid'),
-    body('password')
-      .trim()
-      .isLength({ min: 6, max: 32 })
-      .withMessage('Password must be between 6 and 32 characters'),
-  ],
+  body('email').trim().isEmail().withMessage('Email must be valid'),
+  body('password')
+    .trim()
+    .isLength({ min: 6, max: 32 })
+    .withMessage('Password must be between 6 and 32 characters'),
   signup
 );
 router.post('/signin', signin);

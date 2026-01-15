@@ -4,7 +4,7 @@ import userRoutes from './users/users.ts';
 
 const router = Router();
 
-router.use('/users', userRoutes);
 router.use('/auth', authRoutes);
+router.use('/users', userRoutes);
 
 export default router;
