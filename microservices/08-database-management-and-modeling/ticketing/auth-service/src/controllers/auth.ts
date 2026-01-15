@@ -2,6 +2,7 @@ import type { NextFunction, Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import { RequestValidationError } from '../errors/request-validation-error.ts';
 import { User } from '../models/user.ts';
+import { BadRequestError } from '../errors/bad-request-error.ts';
 
 const signup = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -15,13 +16,10 @@ const signup = async (req: Request, res: Response, next: NextFunction) => {
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
-      console.log('Email already exists. Use different one.');
-      return res
-        .status(400)
-        .json({ message: 'Email already exists. Use different one.' });
+      throw new BadRequestError('Email already exists. Use different email.');
     }
 
-    const user = new User({ email, password });
+    const user = User.createUser({ email, password });
     await user.save();
     res.status(201).json({ message: 'User created.', user });
   } catch (error) {
