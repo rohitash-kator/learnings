@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"time"
 )
@@ -10,18 +11,6 @@ type user struct {
 	lastName  string
 	birthDate string
 	createdAt time.Time
-}
-
-// Factory/Constructor/Creation function to create a new user struct instance (Note: This is a regular function, not a method)
-// Important: This function returns a pointer to the user struct instance so that the changes are reflected in the original struct instance,
-// otherwise the changes will be reflected in a copy of the struct instance and not the original struct instance
-func newUser(firstName string, lastName string, birthDate string) *user {
-	return &user{
-		firstName: firstName,
-		lastName:  lastName,
-		birthDate: birthDate,
-		createdAt: time.Now(),
-	}
 }
 
 func main() {
@@ -43,7 +32,13 @@ func main() {
 	// }
 
 	// Direct assignment of values to the struct fields using variable names and values (order is not important)
-	appUser = newUser(userFirstName, userLastName, userBirthDate)
+	appUser, err := newUser(userFirstName, userLastName, userBirthDate)
+
+	if err != nil {
+		// panic(err)
+		fmt.Println(err)
+		return
+	}
 
 	// Direct assignment of values to the struct fields using variable names and values (order is important)
 	// appUser = user{
@@ -90,11 +85,27 @@ func (userInfo *user) clearUserName() {
 
 }
 
+// Factory/Constructor/Creation function to create a new user struct instance (Note: This is a regular function, not a method)
+// Important: This function returns a pointer to the user struct instance so that the changes are reflected in the original struct instance,
+// otherwise the changes will be reflected in a copy of the struct instance and not the original struct instance
+func newUser(firstName string, lastName string, birthDate string) (*user, error) {
+	if firstName == "" || lastName == "" || birthDate == "" {
+		return nil, errors.New("First name, Last name and birth date are required")
+	}
+
+	return &user{
+		firstName: firstName,
+		lastName:  lastName,
+		birthDate: birthDate,
+		createdAt: time.Now(),
+	}, nil
+}
+
 func getUserData(promptText string) string {
 	fmt.Print(promptText)
 	var value string
 
-	fmt.Scan(&value)
+	fmt.Scanln(&value)
 
 	return value
 }
