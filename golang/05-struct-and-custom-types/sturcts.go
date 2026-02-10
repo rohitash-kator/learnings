@@ -33,6 +33,16 @@ func main() {
 		return
 	}
 
+	admin := user.NewAdmin("test@example.com", "admin123")
+
+	// admin.User.OutputUserDetails()
+	// admin.User.ClearUserName()
+	// admin.User.OutputUserDetails()
+
+	admin.OutputUserDetails()
+	admin.ClearUserName()
+	admin.OutputUserDetails()
+
 	// Direct assignment of values to the struct fields using variable names and values (order is important)
 	// appUser = user{
 	// 	userFirstName,

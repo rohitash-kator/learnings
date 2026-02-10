@@ -13,6 +13,13 @@ type User struct {
 	createdAt time.Time
 }
 
+type Admin struct {
+	email    string
+	password string
+	// User     User // Embedding the User struct as a field
+	User // Embedding the User struct as a field anonymously (Note: This is the same as the above commented out code)
+}
+
 // Using value receiver
 // func outputUserDetails(userInfo user) {
 // 	// ...
@@ -40,6 +47,20 @@ func (userInfo *User) ClearUserName() {
 	userInfo.firstName = ""
 	userInfo.lastName = ""
 
+}
+
+func NewAdmin(email, password string) Admin {
+
+	return Admin{
+		email:    email,
+		password: password,
+		User: User{
+			firstName: "ADMIN",
+			lastName:  "ADMIN",
+			birthDate: "----",
+			createdAt: time.Now(),
+		},
+	}
 }
 
 // Factory/Constructor/Creation function to create a new user struct instance (Note: This is a regular function, not a method)
