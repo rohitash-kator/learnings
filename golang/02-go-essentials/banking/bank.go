@@ -96,7 +96,8 @@ func main() {
 			fmt.Println("Balance updated! New amount:", accountBalance)
 			writeBalanceToFile(accountBalance)
 		case 4:
-			fmt.Println("Goodbye! Exiting...")
+			fmt.Println("Goodbye!")
+			fmt.Println("Thanks for choosing our bank")
 			return
 			// break
 		default:
@@ -149,5 +150,4 @@ func main() {
 		// }
 	}
 
-	fmt.Println("Thanks for choosing our bank")
 }
