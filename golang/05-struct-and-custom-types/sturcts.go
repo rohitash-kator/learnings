@@ -12,12 +12,24 @@ type user struct {
 	createdAt time.Time
 }
 
+// Factory/Constructor/Creation function to create a new user struct instance (Note: This is a regular function, not a method)
+// Important: This function returns a pointer to the user struct instance so that the changes are reflected in the original struct instance,
+// otherwise the changes will be reflected in a copy of the struct instance and not the original struct instance
+func newUser(firstName string, lastName string, birthDate string) *user {
+	return &user{
+		firstName: firstName,
+		lastName:  lastName,
+		birthDate: birthDate,
+		createdAt: time.Now(),
+	}
+}
+
 func main() {
 	userFirstName := getUserData("Please enter your first name: ")
 	userLastName := getUserData("Please enter your last name: ")
 	userBirthDate := getUserData("Please enter your birth date (MM/DD/YYYY): ")
 
-	var appUser user
+	var appUser *user
 
 	// Initialize the struct with no values (all fields will be set to their zero/nil values)
 	// appUser = user{}
@@ -31,12 +43,7 @@ func main() {
 	// }
 
 	// Direct assignment of values to the struct fields using variable names and values (order is not important)
-	appUser = user{
-		firstName: userFirstName,
-		lastName:  userLastName,
-		birthDate: userBirthDate,
-		createdAt: time.Now(),
-	}
+	appUser = newUser(userFirstName, userLastName, userBirthDate)
 
 	// Direct assignment of values to the struct fields using variable names and values (order is important)
 	// appUser = user{
