@@ -17,7 +17,7 @@ type Admin struct {
 	email    string
 	password string
 	// User     User // Embedding the User struct as a field
-	User // Embedding the User struct as a field anonymously (Note: This is the same as the above commented out code)
+	User // Embedding the User struct as a field anonymously
 }
 
 // Using value receiver
