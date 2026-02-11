@@ -22,8 +22,11 @@ func main() {
 	featuredPricesFromStart := prices[:4] // Slice of prices from start to index 3
 	featuredPricesTillEnd := prices[1:]   // Slice of prices from index 1 to end
 
+	highlightedPrices := featuredPricesFromStart[:1] // Slice from a slice
+
 	fmt.Println(featuredPrices)          // [2.99 3.65 4.67]
 	fmt.Println(featuredPricesFromStart) // [1.01 2.99 3.65 4.67]
 	fmt.Println(featuredPricesTillEnd)   // [2.99 3.65 4.67]
 	fmt.Println(featuredPrices[1])       // 3.65
+	fmt.Println(highlightedPrices)       // [1.01]
 }
