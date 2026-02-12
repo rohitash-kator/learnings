@@ -11,9 +11,15 @@ func dynamicListsWithSlices() {
 	prices[1] = 9.99
 	// prices[2] = 11.99 // This will cause a runtime error of index out of range as the array is fixed length
 
-	prices = append(prices, 5.99) // This will create a new array with the new price and return the new slice
+	prices = append(prices, 5.99, 12.99, 29.99, 100.19) // This will create a new array with the new price and return the new slice (multiple values can be added at once)
 
-	fmt.Println(prices) // [10.99 9.99 5.99] [10.99 9.99]
+	fmt.Println(prices) // [10.99 9.99 5.99 12.99 29.99 100.19]
+
+	discountPrice := []float64{101.99, 80.99, 20.95}
+
+	prices = append(prices, discountPrice...) // Merge the discountPrice slice into the prices slice
+
+	fmt.Println(prices) // [10.99 9.99 5.99 12.99 29.99 100.19 101.99 80.99 20.95]
 }
 
 func main() {
